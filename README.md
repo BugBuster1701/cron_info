@@ -1,11 +1,12 @@
-Cron-Informations
-=================
+CronInformations for Contao 3
+=============================
 
 ## About
 
 Cron-Overview:
 * last execution time
 * registrations
+* start cron job
 
 
 ## Branches
