@@ -1,5 +1,5 @@
-CronInformations for Contao 3
-=============================
+Cron Informations for Contao 3
+==============================
 
 ## About
 
