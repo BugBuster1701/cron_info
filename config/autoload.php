@@ -36,4 +36,5 @@ ClassLoader::addClasses(array
 TemplateLoader::addFiles(array
 (
 	'mod_cron_registry_be' => 'system/modules/cron_info/templates',
+	'mod_cron_start_be'    => 'system/modules/cron_info/templates',
 ));

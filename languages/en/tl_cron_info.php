@@ -26,3 +26,4 @@ $GLOBALS['TL_LANG']['CronInfo']['class']         = 'Class';
 $GLOBALS['TL_LANG']['CronInfo']['method']        = 'Method';
 $GLOBALS['TL_LANG']['CronInfo']['start']         = array('Start','Now start the cronjob');
 $GLOBALS['TL_LANG']['CronInfo']['start_confirm'] = 'Now start this cronjob?';
+$GLOBALS['TL_LANG']['CronInfo']['cron_tl_log']   = 'Logging into table tl_log';
