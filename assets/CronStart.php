@@ -49,8 +49,31 @@ class CronStart extends Frontend
 	{
 		$strEncypt = Input::get('crcst');
 		$arrDecypt = deserialize( Encryption::decrypt( base64_decode($strEncypt) ) );
-		$class = $arrDecypt[0];
-		$method = $arrDecypt[1];
+		if (is_array($arrDecypt)) 
+		{
+			$class  = $arrDecypt[0];
+			$method = $arrDecypt[1];
+		}
+		else 
+		{
+			//Hack Attack!
+			$this->loadLanguageFile('tl_cron_info');
+			
+			$this->Template = new BackendTemplate('mod_cron_start_be');
+			$this->Template->referer = $this->getReferer(ENCODE_AMPERSANDS); //$this->Environment->get(httpReferer);
+			$this->Template->theme = $this->getTheme();
+			$this->Template->base = Environment::get('base');
+			$this->Template->language = $GLOBALS['TL_LANGUAGE'];
+			$this->Template->title = 'CronInfo';
+			$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
+			
+			$this->Template->cronjob      = 'Hack Attack!';
+			$this->Template->cronlogtitle = '';
+			$this->Template->cronlog      = 'Wrong parameter. Bug or hack attack.';
+			$this->Template->output();
+			exit;
+		}
+		
 		
 		$this->loadLanguageFile('tl_cron_info');
 
@@ -59,9 +82,10 @@ class CronStart extends Frontend
 		$this->Template->theme = $this->getTheme();
 		$this->Template->base = Environment::get('base');
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
-		$this->Template->title = specialchars($GLOBALS['TL_LANG']['MSC']['helpWizardTitle']);
+		$this->Template->title = 'CronInfo';
 		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
-
+		$this->Template->cronlogtitle = $GLOBALS['TL_LANG']['CronInfo']['cron_tl_log'] . ':';
+		
 		$GLOBALS['TL_CONFIG']['debugMode'] = false;
 		$this->Template->cronjob = $class.'.'.$method.'()';
 		

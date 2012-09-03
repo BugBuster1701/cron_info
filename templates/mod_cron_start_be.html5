@@ -15,7 +15,7 @@
 <div id="container">
 	<div id="main">
 		<h3><?php echo $this->cronjob; ?></h3>
-		<h4><?php echo $GLOBALS['TL_LANG']['CronInfo']['cron_tl_log']; ?>:</h4>
+		<h4><?php echo $this->cronlogtitle; ?></h4>
 		<?php echo $this->cronlog; ?>
 	</div>
 </div>
