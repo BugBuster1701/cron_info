@@ -22,7 +22,7 @@ namespace BugBuster\CronInfo;
  *
  * @copyright  Glen Langer 2012 
  * @author     Glen Langer 
- * @package    CronRegistry
+ * @package    CronInfo
  */
 class CronRegistry extends \BackendModule
 {
@@ -282,6 +282,7 @@ class CronRegistry extends \BackendModule
     	$row=0;
     	foreach ($GLOBALS['TL_CRON']['monthly'] as $reg )
     	{
+    		$strEncypt = base64_encode( \Encryption::encrypt( serialize( array( $reg[0],$reg[1] ) ) ) );
     		$interval = (!$row) ? '<strong>'.$GLOBALS['TL_LANG']['CronInfo']['interval_monthly'].'</strong>' : '' ;
     		$strRegistrations .= '
     		<tr>
@@ -291,7 +292,7 @@ class CronRegistry extends \BackendModule
     			<td> </td>
     			<td>'.$reg[1].'</td>
     			<td> </td>
-    			<td style="text-align: center;"><a href="" title="'.$GLOBALS['TL_LANG']['CronInfo']['start'][1].'" onclick="if(!confirm(\''.$GLOBALS['TL_LANG']['CronInfo']['start_confirm'].'\'))return false;Backend.getScrollOffset()"><img titel="'.$GLOBALS['TL_LANG']['CronInfo']['start'][1].'" src="system/modules/cron_info/assets/cron_info_start_icon.png"></a></td>
+    			<td style="text-align: center;"><a href="system/modules/cron_info/assets/CronStart.php?crcst='.$strEncypt.'" title="'.$GLOBALS['TL_LANG']['CronInfo']['start'][1].'" onclick="if(!confirm(\''.$GLOBALS['TL_LANG']['CronInfo']['start_confirm'].'\'))return false;Backend.openModalIframe({\'width\':735,\'height\':405,\'title\':\'Cronjob Start\',\'url\':this.href});return false"><img src="system/modules/cron_info/assets/cron_info_start_icon.png" width="16" height="16" alt="'.$GLOBALS['TL_LANG']['CronInfo']['start'][1].'" style="vertical-align:text-bottom"></a></td>
     		</tr>
     		';
     		$row++;
@@ -299,6 +300,7 @@ class CronRegistry extends \BackendModule
     	$row=0;
     	foreach ($GLOBALS['TL_CRON']['weekly'] as $reg )
     	{
+    		$strEncypt = base64_encode( \Encryption::encrypt( serialize( array( $reg[0],$reg[1] ) ) ) );
     		$interval = (!$row) ? '<strong>'.$GLOBALS['TL_LANG']['CronInfo']['interval_weekly'].'</strong>' : '' ;
     		$strRegistrations .= '
     		<tr>
@@ -308,7 +310,7 @@ class CronRegistry extends \BackendModule
     			<td> </td>
     			<td>'.$reg[1].'</td>
     			<td> </td>
-    			<td style="text-align: center;"><a href="" title="'.$GLOBALS['TL_LANG']['CronInfo']['start'][1].'" onclick="if(!confirm(\''.$GLOBALS['TL_LANG']['CronInfo']['start_confirm'].'\'))return false;Backend.getScrollOffset()"><img titel="'.$GLOBALS['TL_LANG']['CronInfo']['start'][1].'" src="system/modules/cron_info/assets/cron_info_start_icon.png"></a></td>
+    			<td style="text-align: center;"><a href="system/modules/cron_info/assets/CronStart.php?crcst='.$strEncypt.'" title="'.$GLOBALS['TL_LANG']['CronInfo']['start'][1].'" onclick="if(!confirm(\''.$GLOBALS['TL_LANG']['CronInfo']['start_confirm'].'\'))return false;Backend.openModalIframe({\'width\':735,\'height\':405,\'title\':\'Cronjob Start\',\'url\':this.href});return false"><img src="system/modules/cron_info/assets/cron_info_start_icon.png" width="16" height="16" alt="'.$GLOBALS['TL_LANG']['CronInfo']['start'][1].'" style="vertical-align:text-bottom"></a></td>
     		</tr>
     		';
     		$row++;
@@ -316,6 +318,7 @@ class CronRegistry extends \BackendModule
     	$row=0;
     	foreach ($GLOBALS['TL_CRON']['daily'] as $reg )
     	{
+    		$strEncypt = base64_encode( \Encryption::encrypt( serialize( array( $reg[0],$reg[1] ) ) ) );
     		$interval = (!$row) ? '<strong>'.$GLOBALS['TL_LANG']['CronInfo']['interval_daily'].'</strong>' : '' ;
     		$strRegistrations .= '
     		<tr>
@@ -325,7 +328,7 @@ class CronRegistry extends \BackendModule
     			<td> </td>
     			<td>'.$reg[1].'</td>
     			<td> </td>
-    			<td style="text-align: center;"><a href="" title="'.$GLOBALS['TL_LANG']['CronInfo']['start'][1].'" onclick="if(!confirm(\''.$GLOBALS['TL_LANG']['CronInfo']['start_confirm'].'\'))return false;Backend.getScrollOffset()"><img titel="'.$GLOBALS['TL_LANG']['CronInfo']['start'][1].'" src="system/modules/cron_info/assets/cron_info_start_icon.png"></a></td>
+    			<td style="text-align: center;"><a href="system/modules/cron_info/assets/CronStart.php?crcst='.$strEncypt.'" title="'.$GLOBALS['TL_LANG']['CronInfo']['start'][1].'" onclick="if(!confirm(\''.$GLOBALS['TL_LANG']['CronInfo']['start_confirm'].'\'))return false;Backend.openModalIframe({\'width\':735,\'height\':405,\'title\':\'Cronjob Start\',\'url\':this.href});return false"><img src="system/modules/cron_info/assets/cron_info_start_icon.png" width="16" height="16" alt="'.$GLOBALS['TL_LANG']['CronInfo']['start'][1].'" style="vertical-align:text-bottom"></a></td>
     		</tr>
     		';
     		$row++;
@@ -333,6 +336,7 @@ class CronRegistry extends \BackendModule
     	$row=0;
     	foreach ($GLOBALS['TL_CRON']['hourly'] as $reg )
     	{
+    		$strEncypt = base64_encode( \Encryption::encrypt( serialize( array( $reg[0],$reg[1] ) ) ) );
     		$interval = (!$row) ? '<strong>'.$GLOBALS['TL_LANG']['CronInfo']['interval_hourly'].'</strong>' : '' ;
     		$strRegistrations .= '
     		<tr>
@@ -342,7 +346,7 @@ class CronRegistry extends \BackendModule
     			<td> </td>
     			<td>'.$reg[1].'</td>
     			<td> </td>
-    			<td style="text-align: center;"><a href="" title="'.$GLOBALS['TL_LANG']['CronInfo']['start'][1].'" onclick="if(!confirm(\''.$GLOBALS['TL_LANG']['CronInfo']['start_confirm'].'\'))return false;Backend.getScrollOffset()"><img titel="'.$GLOBALS['TL_LANG']['CronInfo']['start'][1].'" src="system/modules/cron_info/assets/cron_info_start_icon.png"></a></td>
+    			<td style="text-align: center;"><a href="system/modules/cron_info/assets/CronStart.php?crcst='.$strEncypt.'" title="'.$GLOBALS['TL_LANG']['CronInfo']['start'][1].'" onclick="if(!confirm(\''.$GLOBALS['TL_LANG']['CronInfo']['start_confirm'].'\'))return false;Backend.openModalIframe({\'width\':735,\'height\':405,\'title\':\'Cronjob Start\',\'url\':this.href});return false"><img src="system/modules/cron_info/assets/cron_info_start_icon.png" width="16" height="16" alt="'.$GLOBALS['TL_LANG']['CronInfo']['start'][1].'" style="vertical-align:text-bottom"></a></td>
     		</tr>
     		';
     		$row++;
@@ -350,6 +354,7 @@ class CronRegistry extends \BackendModule
     	$row=0;
     	foreach ($GLOBALS['TL_CRON']['minutely'] as $reg )
     	{
+    		$strEncypt = base64_encode( \Encryption::encrypt( serialize( array( $reg[0],$reg[1] ) ) ) );
     		$interval = (!$row) ? '<strong>'.$GLOBALS['TL_LANG']['CronInfo']['interval_minutely'].'</strong>' : '' ;
     		$strRegistrations .= '
     		<tr>
@@ -359,7 +364,7 @@ class CronRegistry extends \BackendModule
     			<td> </td>
     			<td>'.$reg[1].'</td>
     			<td> </td>
-    			<td style="text-align: center;"><a href="" title="'.$GLOBALS['TL_LANG']['CronInfo']['start'][1].'" onclick="if(!confirm(\''.$GLOBALS['TL_LANG']['CronInfo']['start_confirm'].'\'))return false;Backend.getScrollOffset()"><img titel="'.$GLOBALS['TL_LANG']['CronInfo']['start'][1].'" src="system/modules/cron_info/assets/cron_info_start_icon.png"></a></td>
+    			<td style="text-align: center;"><a href="system/modules/cron_info/assets/CronStart.php?crcst='.$strEncypt.'" title="'.$GLOBALS['TL_LANG']['CronInfo']['start'][1].'" onclick="if(!confirm(\''.$GLOBALS['TL_LANG']['CronInfo']['start_confirm'].'\'))return false;Backend.openModalIframe({\'width\':735,\'height\':405,\'title\':\'Cronjob Start\',\'url\':this.href});return false"><img src="system/modules/cron_info/assets/cron_info_start_icon.png" width="16" height="16" alt="'.$GLOBALS['TL_LANG']['CronInfo']['start'][1].'" style="vertical-align:text-bottom"></a></td>
     		</tr>
     		';
     		$row++;

@@ -26,3 +26,4 @@ $GLOBALS['TL_LANG']['CronInfo']['class']         = 'Klasse';
 $GLOBALS['TL_LANG']['CronInfo']['method']        = 'Methode';
 $GLOBALS['TL_LANG']['CronInfo']['start']         = array('Start','Jetzt den Cronjob starten');
 $GLOBALS['TL_LANG']['CronInfo']['start_confirm'] = 'Jetzt diesen Cronjob starten?';
+$GLOBALS['TL_LANG']['CronInfo']['cron_tl_log']   = 'Protokollierung in Tabelle tl_log';
