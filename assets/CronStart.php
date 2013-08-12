@@ -97,15 +97,36 @@ class CronStart extends Frontend
 		$this->$class->$method();
 		$this->log('Manually cron job complete', 'CronStart run()', TL_CRON);
 		
-		$objLog = $this->Database->prepare("SELECT `id` FROM `tl_log` WHERE `tstamp` >=? AND `func`=? ORDER BY `id`")
-								   ->limit(2)
-								   ->execute($CronStartTime, 'CronStart run()');
+		$objLog = \Database::getInstance()
+		                ->prepare("SELECT 
+                                        `id` 
+                                    FROM 
+                                        `tl_log` 
+                                    WHERE 
+		                                `tstamp` >= ? 
+		                            AND 
+		                                `func` = ? 
+		                            ORDER BY `id`
+		                        ")
+					   ->limit(2)
+					   ->execute($CronStartTime, 'CronStart run()');
 		$startID = $objLog->id;
 		$objLog->next();
 		$endID = $objLog->id;
 
-		$objLog = $this->Database->prepare("SELECT `tstamp`, `text` FROM `tl_log` WHERE `id`>=? AND `id`<=? ORDER BY `id`")
-								 ->execute($startID,$endID);
+		$objLog = \Database::getInstance()
+		                ->prepare("SELECT 
+                                        `tstamp`, 
+		                                `text` 
+                                    FROM 
+		                                `tl_log` 
+		                            WHERE 
+		                                `id` >= ? 
+		                            AND 
+		                                `id` <= ? 
+		                            ORDER BY `id`
+		                        ")
+						 ->execute($startID, $endID);
 		$this->Template->cronlog = '<ul>';
 		while ($objLog->next()) 
 		{

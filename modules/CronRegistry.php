@@ -1,14 +1,12 @@
 <?php 
 
 /**
- * Contao Open Source CMS
+ * Contao Open Source CMS, Copyright (C) 2005-2013 Leo Feyer
  * 
- * Copyright (C) 2005-2012 Leo Feyer
- * 
- * @package   CronInfo 
- * @author    Glen Langer 
- * @license   LGPL 
- * @copyright Glen Langer 2012 
+ * @package    CronInfo 
+ * @copyright  Glen Langer (BugBuster) 2012..2013
+ * @author     BugBuster
+ * @license    LGPL
  */
 
 
@@ -20,8 +18,8 @@ namespace BugBuster\CronInfo;
 /**
  * Class CronTimestamp 
  *
- * @copyright  Glen Langer 2012 
- * @author     Glen Langer 
+ * @copyright  Glen Langer (BugBuster) 2012..2013
+ * @author     BugBuster 
  * @package    CronInfo
  */
 class CronRegistry extends \BackendModule
@@ -118,11 +116,27 @@ class CronRegistry extends \BackendModule
   
     protected function getCronExecutionTimeCron()
     {
-        $arrTimestamps     = array('monthly'=>'--', 'weekly_from'=>0, 'weekly_to'=>0, 'weekly_nr'=>0, 'daily'=>'--', 'hourly'=>'--', 'minutely'=>'--');
+        $arrTimestamps     = array('monthly'    =>'--', 
+                                   'weekly_from'=>0, 
+                                   'weekly_to'  =>0, 
+                                   'weekly_nr'  =>0, 
+                                   'daily'      =>'--', 
+                                   'hourly'     =>'--', 
+                                   'minutely'   =>'--'
+                                );
         $arrTimestampsTemp = array();
       
-        $objTimestamps = $this->Database->prepare("SELECT * FROM `tl_cron` WHERE `name`!=? AND `value`>0")
-                                        ->execute('lastrun'); 
+        $objTimestamps = \Database::getInstance()
+                            ->prepare("SELECT 
+                                            * 
+                                        FROM 
+                                            `tl_cron` 
+                                        WHERE 
+                                            `name` != ? 
+                                        AND 
+                                            `value` > 0
+                                    ")
+                            ->execute('lastrun'); 
             
         while($objTimestamps->next())
         {
@@ -153,70 +167,110 @@ class CronRegistry extends \BackendModule
 	
 	protected function getCronExecutionTimeLog()
 	{
-	    $arrTimestamps     = array('monthly'=>'--', 'weekly'=>'--', 'daily'=>'--', 'hourly'=>'--', 'minutely'=>'--');
+	    $arrTimestamps     = array('monthly'  =>'--', 
+	                               'weekly'   =>'--', 
+	                               'daily'    =>'--', 
+	                               'hourly'   =>'--', 
+	                               'minutely' =>'--'
+	                            );
 	    $arrTimestampsTemp = array();
 		
 		//last call monthly cron job
-		$objTimestamps = $this->Database->prepare("SELECT `tstamp` FROM `tl_log`
-											        WHERE `action` = 'CRON'
-											        AND `func` = 'CronJobs run()'
-											        AND `text` = ?
-											        ORDER BY `tstamp` DESC
-											        ")
-								        ->limit(1)
-								        ->execute('Running the monthly cron jobs');
+		$objTimestamps = \Database::getInstance()
+                            ->prepare("SELECT 
+                                            `tstamp` 
+                                        FROM 
+                                            `tl_log`
+								        WHERE 
+                                            `action` = 'CRON'
+								        AND 
+                                            `func` = 'CronJobs run()'
+								        AND 
+                                            `text` = ?
+								        ORDER BY `tstamp` DESC
+							        ")
+					        ->limit(1)
+					        ->execute('Running the monthly cron jobs');
 		if ($objTimestamps->numRows == 1)
 		{
 		    $arrTimestampsTemp['monthly'] = date($GLOBALS['TL_CONFIG']['datimFormat'], $objTimestamps->tstamp);
 		}
 		//last call weekly cron job
-		$objTimestamps = $this->Database->prepare("SELECT `tstamp` FROM `tl_log`
-											        WHERE `action` = 'CRON'
-											        AND `func` = 'CronJobs run()'
-											        AND `text` = ?
-											        ORDER BY `tstamp` DESC
-											        ")
-								        ->limit(1)
-								        ->execute('Running the weekly cron jobs');
+		$objTimestamps = \Database::getInstance()
+                            ->prepare("SELECT 
+                                            `tstamp` 
+                                        FROM 
+                                            `tl_log`
+								        WHERE 
+                                            `action` = 'CRON'
+								        AND 
+                                            `func` = 'CronJobs run()'
+								        AND 
+                                            `text` = ?
+								        ORDER BY `tstamp` DESC
+							        ")
+					        ->limit(1)
+					        ->execute('Running the weekly cron jobs');
 		if ($objTimestamps->numRows == 1)
 		{
 		    $arrTimestampsTemp['weekly'] = date($GLOBALS['TL_CONFIG']['datimFormat'], $objTimestamps->tstamp);
 		}
 		//last call daily cron job
-		$objTimestamps = $this->Database->prepare("SELECT `tstamp` FROM `tl_log`
-											        WHERE `action` = 'CRON'
-											        AND `func` = 'CronJobs run()'
-											        AND `text` = ?
-											        ORDER BY `tstamp` DESC
-											        ")
-								        ->limit(1)
-								        ->execute('Running the daily cron jobs');
+		$objTimestamps = \Database::getInstance()
+                            ->prepare("SELECT 
+                                            `tstamp` 
+                                        FROM 
+                                            `tl_log`
+								        WHERE 
+                                            `action` = 'CRON'
+								        AND 
+                                            `func` = 'CronJobs run()'
+								        AND 
+                                            `text` = ?
+								        ORDER BY `tstamp` DESC
+							        ")
+					        ->limit(1)
+					        ->execute('Running the daily cron jobs');
 		if ($objTimestamps->numRows == 1)
 		{
 		    $arrTimestampsTemp['daily'] = date($GLOBALS['TL_CONFIG']['datimFormat'], $objTimestamps->tstamp);
 		}
 		//last call hourly cron job
-		$objTimestamps = $this->Database->prepare("SELECT `tstamp` FROM `tl_log`
-											        WHERE `action` = 'CRON'
-											        AND `func` = 'CronJobs run()'
-											        AND `text` = ?
-											        ORDER BY `tstamp` DESC
-											        ")
-								        ->limit(1)
-								        ->execute('Running the hourly cron jobs');
+		$objTimestamps = \Database::getInstance()
+                            ->prepare("SELECT 
+                                            `tstamp` 
+                                        FROM 
+                                            `tl_log`
+								        WHERE 
+                                            `action` = 'CRON'
+								        AND 
+                                            `func` = 'CronJobs run()'
+								        AND 
+                                            `text` = ?
+								        ORDER BY `tstamp` DESC
+							        ")
+					        ->limit(1)
+					        ->execute('Running the hourly cron jobs');
 		if ($objTimestamps->numRows == 1)
 		{
 		    $arrTimestampsTemp['hourly'] = date($GLOBALS['TL_CONFIG']['datimFormat'], $objTimestamps->tstamp);
 		}
 		//last call minutely cron job
-		$objTimestamps = $this->Database->prepare("SELECT `tstamp` FROM `tl_log`
-											        WHERE `action` = 'CRON'
-											        AND `func` = 'CronJobs run()'
-											        AND `text` = ?
-											        ORDER BY `tstamp` DESC
-											        ")
-								        ->limit(1)
-								        ->execute('Running the minutely cron jobs');
+		$objTimestamps = \Database::getInstance()
+                            ->prepare("SELECT 
+                                            `tstamp` 
+                                        FROM 
+                                            `tl_log`
+								        WHERE 
+                                            `action` = 'CRON'
+								        AND 
+                                            `func` = 'CronJobs run()'
+								        AND 
+                                            `text` = ?
+								        ORDER BY `tstamp` DESC
+							        ")
+					        ->limit(1)
+					        ->execute('Running the minutely cron jobs');
 		if ($objTimestamps->numRows == 1)
 		{
 		    $arrTimestampsTemp['minutely'] = date($GLOBALS['TL_CONFIG']['datimFormat'], $objTimestamps->tstamp);
