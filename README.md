@@ -8,6 +8,12 @@ Cron-Overview:
 * registrations
 * start cron job
 
+## For Translators
+Translations are managed using Transifex. To create a new translation or to help to maintain an existing one, please register at transifex.com.
+
+Project Link: [https://www.transifex.com/projects/p/contao-cron_info/](https://www.transifex.com/projects/p/contao-cron_info/)
+
+Howto: [http://help.transifex.com/intro/translating.html](http://help.transifex.com/intro/translating.html)
 
 ## Branches
 
