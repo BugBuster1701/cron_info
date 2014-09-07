@@ -27,7 +27,7 @@
 		"classmap":[""]
 	},
 	"replace":{
-		"contao-legacy/cron_info":"*"
+		"contao-legacy/cron_info":"self.version"
 	},
 	"extra":{
 		"contao":{

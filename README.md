@@ -1,5 +1,6 @@
 Cron Informations for Contao 3
 ==============================
+[![Latest Stable Version](https://poser.pugx.org/bugbuster/cron_info/v/stable.svg)](https://packagist.org/packages/bugbuster/cron_info) [![Total Downloads](https://poser.pugx.org/bugbuster/cron_info/downloads.svg)](https://packagist.org/packages/bugbuster/cron_info) [![Latest Unstable Version](https://poser.pugx.org/bugbuster/cron_info/v/unstable.svg)](https://packagist.org/packages/bugbuster/cron_info) [![License](https://poser.pugx.org/bugbuster/cron_info/license.svg)](https://packagist.org/packages/bugbuster/cron_info)
 
 ## About
 
@@ -13,7 +14,7 @@ Translations are managed using Transifex. To create a new translation or to help
 
 Project Link: [https://www.transifex.com/projects/p/contao-cron_info/](https://www.transifex.com/projects/p/contao-cron_info/)
 
-Howto: [http://help.transifex.com/intro/translating.html](http://help.transifex.com/intro/translating.html)
+Howto: [http://docs.transifex.com/faq/#translating](http://docs.transifex.com/faq/#translating)
 
 ## Branches
 
@@ -21,7 +22,6 @@ Howto: [http://help.transifex.com/intro/translating.html](http://help.transifex.
 
 **dev** This is the current unstable upstream development branch.
 
-**uat** This is the current release candidate branch. (see tags with "rc" in name)
 
 
 This software using the Fugue Icons from http://p.yusukekamiyamane.com/icons/search/fugue/

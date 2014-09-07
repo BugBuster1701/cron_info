@@ -48,69 +48,124 @@ class CronRegistry extends \BackendModule
     	$this->Template->timeinfo ='';
     
     	$arrTimestampsCron =  $this->getCronExecutionTimeCron();
-    	$arrTimestampsLog  =  $this->getCronExecutionTimeLog();
 
-    	$this->Template->timeinfo .='
-    	<div id="tl_maintenance_cache">
-      	<table>
-      	<thead>
-	        <tr>
-          		<th class="nw">'.$GLOBALS['TL_LANG']['CronInfo']['cron_time_interval'].'</th>
-          		<th>&nbsp;</th>
-          		<th>'.$GLOBALS['TL_LANG']['CronInfo']['cron_last_start'].' (tl_cron)</th>
-          		<th>&nbsp;</th>
-          		<th>'.$GLOBALS['TL_LANG']['CronInfo']['cron_last_start'].' (tl_log)</th>
-        	</tr>
-      	</thead>
-      	<tbody>
-	        <tr>
-          		<td><strong>'.$GLOBALS['TL_LANG']['CronInfo']['interval_monthly'].'</strong></td>
-          		<td> </td>
-          		<td>'. $arrTimestampsCron['monthly'] .'</td>
-          		<td> </td>
-          		<td>'. $arrTimestampsLog['monthly'] .'</td>
-        	</tr>
-        	<tr>
-          		<td><strong>'.$GLOBALS['TL_LANG']['CronInfo']['interval_weekly'].'</strong></td>
-          		<td> </td>
-          		<td>';
-    	if ($arrTimestampsCron['weekly_nr'] >0) 
+    	if (version_compare(VERSION, '3.3', '<'))
     	{
-    		$this->Template->timeinfo .= $GLOBALS['TL_LANG']['CronInfo']['calendar_week'].' '. $arrTimestampsCron['weekly_nr'] . '<br>(' . $arrTimestampsCron['weekly_from'] . ' - '.$arrTimestampsCron['weekly_to'].')';
+    	    $arrTimestampsLog  =  $this->getCronExecutionTimeLog();
+        	$this->Template->timeinfo .='
+        	<div id="tl_maintenance_cache">
+          	<table>
+          	<thead>
+    	        <tr>
+              		<th class="nw">'.$GLOBALS['TL_LANG']['CronInfo']['cron_time_interval'].'</th>
+              		<th>&nbsp;</th>
+              		<th>'.$GLOBALS['TL_LANG']['CronInfo']['cron_last_start'].' (tl_cron)</th>
+              		<th>&nbsp;</th>
+              		<th>'.$GLOBALS['TL_LANG']['CronInfo']['cron_last_start'].' (tl_log)</th>
+            	</tr>
+          	</thead>
+          	<tbody>
+    	        <tr>
+              		<td><strong>'.$GLOBALS['TL_LANG']['CronInfo']['interval_monthly'].'</strong></td>
+              		<td> </td>
+              		<td>'. $arrTimestampsCron['monthly'] .'</td>
+              		<td> </td>
+              		<td>'. $arrTimestampsLog['monthly'] .'</td>
+            	</tr>
+            	<tr>
+              		<td><strong>'.$GLOBALS['TL_LANG']['CronInfo']['interval_weekly'].'</strong></td>
+              		<td> </td>
+              		<td>';
+        	if ($arrTimestampsCron['weekly_nr'] >0) 
+        	{
+        		$this->Template->timeinfo .= $GLOBALS['TL_LANG']['CronInfo']['calendar_week'].' '. $arrTimestampsCron['weekly_nr'] . '<br>(' . $arrTimestampsCron['weekly_from'] . ' - '.$arrTimestampsCron['weekly_to'].')';
+        	}
+        	else
+        	{
+        		$this->Template->timeinfo .= '--';
+        	}
+    		$this->Template->timeinfo .='</td>
+    				<td> </td>
+              		<td>'. $arrTimestampsLog['weekly'] .'</td>
+            	</tr>
+            	<tr>
+              		<td><strong>'.$GLOBALS['TL_LANG']['CronInfo']['interval_daily'].'</strong></td>
+              		<td> </td>
+              		<td>'. $arrTimestampsCron['daily'] .'</td>
+              		<td> </td>
+              		<td>'. $arrTimestampsLog['daily'] .'</td>
+            	</tr>
+            	<tr>
+              		<td><strong>'.$GLOBALS['TL_LANG']['CronInfo']['interval_hourly'].'</strong></td>
+              		<td> </td>
+              		<td>'. $arrTimestampsCron['hourly'] .'</td>
+              		<td> </td>
+              		<td>'. $arrTimestampsLog['hourly'] .'</td>
+            	</tr>
+            	<tr>
+              		<td><strong>'.$GLOBALS['TL_LANG']['CronInfo']['interval_minutely'].'</strong></td>
+              		<td> </td>
+              		<td>'. $arrTimestampsCron['minutely'] .'</td>
+              		<td> </td>
+              		<td>'. $arrTimestampsLog['minutely'] .'</td>
+            	</tr>
+          	</tbody>
+          	</table>
+        	</div>
+';
     	}
-    	else
+    	else // ab Contao 3.3.0
     	{
-    		$this->Template->timeinfo .= '--';
+    	    $this->Template->timeinfo .='
+        	<div id="tl_maintenance_cache">
+          	<table>
+          	<thead>
+    	        <tr>
+              		<th class="nw">'.$GLOBALS['TL_LANG']['CronInfo']['cron_time_interval'].'</th>
+              		<th>&nbsp;</th>
+              		<th>'.$GLOBALS['TL_LANG']['CronInfo']['cron_last_start'].' (tl_cron)</th>
+            	</tr>
+          	</thead>
+          	<tbody>
+    	        <tr>
+              		<td><strong>'.$GLOBALS['TL_LANG']['CronInfo']['interval_monthly'].'</strong></td>
+              		<td> </td>
+              		<td>'. $arrTimestampsCron['monthly'] .'</td>
+            	</tr>
+            	<tr>
+              		<td><strong>'.$GLOBALS['TL_LANG']['CronInfo']['interval_weekly'].'</strong></td>
+              		<td> </td>
+              		<td>';
+    	    if ($arrTimestampsCron['weekly_nr'] >0)
+    	    {
+    	        $this->Template->timeinfo .= $GLOBALS['TL_LANG']['CronInfo']['calendar_week'].' '. $arrTimestampsCron['weekly_nr'] . '<br>(' . $arrTimestampsCron['weekly_from'] . ' - '.$arrTimestampsCron['weekly_to'].')';
+    	    }
+    	    else
+    	    {
+    	        $this->Template->timeinfo .= '--';
+    	    }
+    	    $this->Template->timeinfo .='</td>
+            	</tr>
+            	<tr>
+              		<td><strong>'.$GLOBALS['TL_LANG']['CronInfo']['interval_daily'].'</strong></td>
+              		<td> </td>
+              		<td>'. $arrTimestampsCron['daily'] .'</td>
+            	</tr>
+            	<tr>
+              		<td><strong>'.$GLOBALS['TL_LANG']['CronInfo']['interval_hourly'].'</strong></td>
+              		<td> </td>
+              		<td>'. $arrTimestampsCron['hourly'] .'</td>
+            	</tr>
+            	<tr>
+              		<td><strong>'.$GLOBALS['TL_LANG']['CronInfo']['interval_minutely'].'</strong></td>
+              		<td> </td>
+              		<td>'. $arrTimestampsCron['minutely'] .'</td>
+            	</tr>
+          	</tbody>
+          	</table>
+        	</div>
+';    	    
     	}
-		$this->Template->timeinfo .='</td>
-				<td> </td>
-          		<td>'. $arrTimestampsLog['weekly'] .'</td>
-        	</tr>
-        	<tr>
-          		<td><strong>'.$GLOBALS['TL_LANG']['CronInfo']['interval_daily'].'</strong></td>
-          		<td> </td>
-          		<td>'. $arrTimestampsCron['daily'] .'</td>
-          		<td> </td>
-          		<td>'. $arrTimestampsLog['daily'] .'</td>
-        	</tr>
-        	<tr>
-          		<td><strong>'.$GLOBALS['TL_LANG']['CronInfo']['interval_hourly'].'</strong></td>
-          		<td> </td>
-          		<td>'. $arrTimestampsCron['hourly'] .'</td>
-          		<td> </td>
-          		<td>'. $arrTimestampsLog['hourly'] .'</td>
-        	</tr>
-        	<tr>
-          		<td><strong>'.$GLOBALS['TL_LANG']['CronInfo']['interval_minutely'].'</strong></td>
-          		<td> </td>
-          		<td>'. $arrTimestampsCron['minutely'] .'</td>
-          		<td> </td>
-          		<td>'. $arrTimestampsLog['minutely'] .'</td>
-        	</tr>
-      	</tbody>
-      	</table>
-    	</div>
-    	';
 		$this->Template->reg = $this->getCronRegistrations();
   	}
   
