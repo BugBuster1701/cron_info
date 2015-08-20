@@ -27,8 +27,7 @@ while ($dir != '.' && $dir != '/' && !is_file($dir . '/system/initialize.php'))
 
 if (!is_file($dir . '/system/initialize.php'))
 {
-    echo 'Could not find initialize.php!';
-    exit(1);
+    throw new \ErrorException('Could not find initialize.php!',2,1,basename(__FILE__),__LINE__);
 }
 require($dir . '/system/initialize.php');
 
@@ -74,7 +73,7 @@ class CronStart extends \Frontend
 			$this->loadLanguageFile('tl_cron_info');
 			
 			$this->Template = new \BackendTemplate('mod_cron_start_be');
-			$this->Template->referer = $this->getReferer(ENCODE_AMPERSANDS); //$this->Environment->get(httpReferer);
+			$this->Template->referer = $this->getReferer(ENCODE_AMPERSANDS); 
 			$this->Template->theme = $this->getTheme();
 			$this->Template->base = \Environment::get('base');
 			$this->Template->language = $GLOBALS['TL_LANGUAGE'];
@@ -85,14 +84,13 @@ class CronStart extends \Frontend
 			$this->Template->cronlogtitle = '';
 			$this->Template->cronlog      = 'Wrong parameter. Bug or hack attack.';
 			$this->Template->output();
-			exit;
 		}
 		
 		
 		$this->loadLanguageFile('tl_cron_info');
 
 		$this->Template = new \BackendTemplate('mod_cron_start_be');
-		$this->Template->referer = $this->getReferer(ENCODE_AMPERSANDS); //$this->Environment->get(httpReferer);
+		$this->Template->referer = $this->getReferer(ENCODE_AMPERSANDS);
 		$this->Template->theme = $this->getTheme();
 		$this->Template->base = \Environment::get('base');
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
