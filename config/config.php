@@ -1,14 +1,12 @@
 <?php 
 
 /**
- * Contao Open Source CMS
+ * Contao Open Source CMS, Copyright (C) 2005-2013 Leo Feyer
  * 
- * Copyright (C) 2005-2012 Leo Feyer
- * 
- * @package   CronInfo 
- * @author    Glen Langer 
- * @license   LGPL 
- * @copyright Glen Langer 2012 
+ * @package    CronInfo 
+ * @copyright  Glen Langer (BugBuster) 2012..2013
+ * @author     BugBuster
+ * @license    LGPL
  */
 
 
