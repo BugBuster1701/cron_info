@@ -1,16 +1,18 @@
 <?php
 
 /**
- * Contao Open Source CMS
- * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Contao Open Source CMS, Copyright (C) 2005-2015 Leo Feyer
  * 
  * @package   CronInfo 
  * @author    Glen Langer 
  * @license   LGPL 
- * @copyright Glen Langer 2012 
+ * @copyright Glen Langer 2012..2015 
  */
 
+/**
+ * Namespace
+ */
+namespace BugBuster\CronInfo;
 
 /**
  * Initialize the system
@@ -34,11 +36,11 @@ require($dir . '/system/initialize.php');
 /**
  * Class CronStart 
  *
- * @copyright  Glen Langer 2012 
+ * @copyright  Glen Langer 2012..2015 
  * @author     Glen Langer 
  * @package    CronInfo
  */
-class CronStart extends Frontend
+class CronStart extends \Frontend
 {
 
 	/**
@@ -59,8 +61,8 @@ class CronStart extends Frontend
 	 */
 	public function run()
 	{
-		$strEncypt = Input::get('crcst');
-		$arrDecypt = deserialize( Encryption::decrypt( base64_decode($strEncypt) ) );
+		$strEncypt = \Input::get('crcst');
+		$arrDecypt = deserialize( \Encryption::decrypt( base64_decode($strEncypt) ) );
 		if (is_array($arrDecypt)) 
 		{
 			$class  = $arrDecypt[0];
@@ -71,10 +73,10 @@ class CronStart extends Frontend
 			//Hack Attack!
 			$this->loadLanguageFile('tl_cron_info');
 			
-			$this->Template = new BackendTemplate('mod_cron_start_be');
+			$this->Template = new \BackendTemplate('mod_cron_start_be');
 			$this->Template->referer = $this->getReferer(ENCODE_AMPERSANDS); //$this->Environment->get(httpReferer);
 			$this->Template->theme = $this->getTheme();
-			$this->Template->base = Environment::get('base');
+			$this->Template->base = \Environment::get('base');
 			$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 			$this->Template->title = 'CronInfo';
 			$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
@@ -89,10 +91,10 @@ class CronStart extends Frontend
 		
 		$this->loadLanguageFile('tl_cron_info');
 
-		$this->Template = new BackendTemplate('mod_cron_start_be');
+		$this->Template = new \BackendTemplate('mod_cron_start_be');
 		$this->Template->referer = $this->getReferer(ENCODE_AMPERSANDS); //$this->Environment->get(httpReferer);
 		$this->Template->theme = $this->getTheme();
-		$this->Template->base = Environment::get('base');
+		$this->Template->base = \Environment::get('base');
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 		$this->Template->title = 'CronInfo';
 		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
@@ -154,5 +156,5 @@ class CronStart extends Frontend
 /**
  * Instantiate the controller
  */
-$objCronStart = new CronStart();
+$objCronStart = new \BugBuster\CronInfo\CronStart();
 $objCronStart->run();
