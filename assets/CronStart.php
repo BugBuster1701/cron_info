@@ -84,6 +84,7 @@ class CronStart extends \Frontend
 			$this->Template->cronlogtitle = '';
 			$this->Template->cronlog      = 'Wrong parameter. Bug or hack attack.';
 			$this->Template->output();
+			return ;
 		}
 		
 		
