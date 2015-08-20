@@ -49,123 +49,58 @@ class CronRegistry extends \BackendModule
     
     	$arrTimestampsCron =  $this->getCronExecutionTimeCron();
 
-    	if (version_compare(VERSION, '3.3', '<'))
-    	{
-    	    $arrTimestampsLog  =  $this->getCronExecutionTimeLog();
-        	$this->Template->timeinfo .='
-        	<div id="tl_maintenance_cache">
-          	<table>
-          	<thead>
-    	        <tr>
-              		<th class="nw">'.$GLOBALS['TL_LANG']['CronInfo']['cron_time_interval'].'</th>
-              		<th>&nbsp;</th>
-              		<th>'.$GLOBALS['TL_LANG']['CronInfo']['cron_last_start'].' (tl_cron)</th>
-              		<th>&nbsp;</th>
-              		<th>'.$GLOBALS['TL_LANG']['CronInfo']['cron_last_start'].' (tl_log)</th>
-            	</tr>
-          	</thead>
-          	<tbody>
-    	        <tr>
-              		<td><strong>'.$GLOBALS['TL_LANG']['CronInfo']['interval_monthly'].'</strong></td>
-              		<td> </td>
-              		<td>'. $arrTimestampsCron['monthly'] .'</td>
-              		<td> </td>
-              		<td>'. $arrTimestampsLog['monthly'] .'</td>
-            	</tr>
-            	<tr>
-              		<td><strong>'.$GLOBALS['TL_LANG']['CronInfo']['interval_weekly'].'</strong></td>
-              		<td> </td>
-              		<td>';
-        	if ($arrTimestampsCron['weekly_nr'] >0) 
-        	{
-        		$this->Template->timeinfo .= $GLOBALS['TL_LANG']['CronInfo']['calendar_week'].' '. $arrTimestampsCron['weekly_nr'] . '<br>(' . $arrTimestampsCron['weekly_from'] . ' - '.$arrTimestampsCron['weekly_to'].')';
-        	}
-        	else
-        	{
-        		$this->Template->timeinfo .= '--';
-        	}
-    		$this->Template->timeinfo .='</td>
-    				<td> </td>
-              		<td>'. $arrTimestampsLog['weekly'] .'</td>
-            	</tr>
-            	<tr>
-              		<td><strong>'.$GLOBALS['TL_LANG']['CronInfo']['interval_daily'].'</strong></td>
-              		<td> </td>
-              		<td>'. $arrTimestampsCron['daily'] .'</td>
-              		<td> </td>
-              		<td>'. $arrTimestampsLog['daily'] .'</td>
-            	</tr>
-            	<tr>
-              		<td><strong>'.$GLOBALS['TL_LANG']['CronInfo']['interval_hourly'].'</strong></td>
-              		<td> </td>
-              		<td>'. $arrTimestampsCron['hourly'] .'</td>
-              		<td> </td>
-              		<td>'. $arrTimestampsLog['hourly'] .'</td>
-            	</tr>
-            	<tr>
-              		<td><strong>'.$GLOBALS['TL_LANG']['CronInfo']['interval_minutely'].'</strong></td>
-              		<td> </td>
-              		<td>'. $arrTimestampsCron['minutely'] .'</td>
-              		<td> </td>
-              		<td>'. $arrTimestampsLog['minutely'] .'</td>
-            	</tr>
-          	</tbody>
-          	</table>
-        	</div>
-';
-    	}
-    	else // ab Contao 3.3.0
-    	{
-    	    $this->Template->timeinfo .='
-        	<div id="tl_maintenance_cache">
-          	<table>
-          	<thead>
-    	        <tr>
-              		<th class="nw">'.$GLOBALS['TL_LANG']['CronInfo']['cron_time_interval'].'</th>
-              		<th>&nbsp;</th>
-              		<th>'.$GLOBALS['TL_LANG']['CronInfo']['cron_last_start'].' (tl_cron)</th>
-            	</tr>
-          	</thead>
-          	<tbody>
-    	        <tr>
-              		<td><strong>'.$GLOBALS['TL_LANG']['CronInfo']['interval_monthly'].'</strong></td>
-              		<td> </td>
-              		<td>'. $arrTimestampsCron['monthly'] .'</td>
-            	</tr>
-            	<tr>
-              		<td><strong>'.$GLOBALS['TL_LANG']['CronInfo']['interval_weekly'].'</strong></td>
-              		<td> </td>
-              		<td>';
-    	    if ($arrTimestampsCron['weekly_nr'] >0)
-    	    {
-    	        $this->Template->timeinfo .= $GLOBALS['TL_LANG']['CronInfo']['calendar_week'].' '. $arrTimestampsCron['weekly_nr'] . '<br>(' . $arrTimestampsCron['weekly_from'] . ' - '.$arrTimestampsCron['weekly_to'].')';
-    	    }
-    	    else
-    	    {
-    	        $this->Template->timeinfo .= '--';
-    	    }
-    	    $this->Template->timeinfo .='</td>
-            	</tr>
-            	<tr>
-              		<td><strong>'.$GLOBALS['TL_LANG']['CronInfo']['interval_daily'].'</strong></td>
-              		<td> </td>
-              		<td>'. $arrTimestampsCron['daily'] .'</td>
-            	</tr>
-            	<tr>
-              		<td><strong>'.$GLOBALS['TL_LANG']['CronInfo']['interval_hourly'].'</strong></td>
-              		<td> </td>
-              		<td>'. $arrTimestampsCron['hourly'] .'</td>
-            	</tr>
-            	<tr>
-              		<td><strong>'.$GLOBALS['TL_LANG']['CronInfo']['interval_minutely'].'</strong></td>
-              		<td> </td>
-              		<td>'. $arrTimestampsCron['minutely'] .'</td>
-            	</tr>
-          	</tbody>
-          	</table>
-        	</div>
+
+	    $this->Template->timeinfo .='
+<div id="tl_maintenance_cache">
+<table>
+<thead>
+    <tr>
+  		<th class="nw">'.$GLOBALS['TL_LANG']['CronInfo']['cron_time_interval'].'</th>
+  		<th>&nbsp;</th>
+  		<th>'.$GLOBALS['TL_LANG']['CronInfo']['cron_last_start'].' (tl_cron)</th>
+	</tr>
+</thead>
+<tbody>
+    <tr>
+  		<td><strong>'.$GLOBALS['TL_LANG']['CronInfo']['interval_monthly'].'</strong></td>
+  		<td> </td>
+  		<td>'. $arrTimestampsCron['monthly'] .'</td>
+	</tr>
+	<tr>
+  		<td><strong>'.$GLOBALS['TL_LANG']['CronInfo']['interval_weekly'].'</strong></td>
+  		<td> </td>
+  		<td>';
+	    if ($arrTimestampsCron['weekly_nr'] >0)
+	    {
+	        $this->Template->timeinfo .= $GLOBALS['TL_LANG']['CronInfo']['calendar_week'].' '. $arrTimestampsCron['weekly_nr'] . '<br>(' . $arrTimestampsCron['weekly_from'] . ' - '.$arrTimestampsCron['weekly_to'].')';
+	    }
+	    else
+	    {
+	        $this->Template->timeinfo .= '--';
+	    }
+	    $this->Template->timeinfo .='
+        </td>
+	</tr>
+	<tr>
+  		<td><strong>'.$GLOBALS['TL_LANG']['CronInfo']['interval_daily'].'</strong></td>
+  		<td> </td>
+  		<td>'. $arrTimestampsCron['daily'] .'</td>
+	</tr>
+	<tr>
+  		<td><strong>'.$GLOBALS['TL_LANG']['CronInfo']['interval_hourly'].'</strong></td>
+  		<td> </td>
+  		<td>'. $arrTimestampsCron['hourly'] .'</td>
+	</tr>
+	<tr>
+  		<td><strong>'.$GLOBALS['TL_LANG']['CronInfo']['interval_minutely'].'</strong></td>
+  		<td> </td>
+  		<td>'. $arrTimestampsCron['minutely'] .'</td>
+	</tr>
+</tbody>
+</table>
+</div>
 ';    	    
-    	}
+
 		$this->Template->reg = $this->getCronRegistrations();
   	}
   
@@ -374,36 +309,36 @@ class CronRegistry extends \BackendModule
     
     protected function getCronRegistrations()
     {
-    	$strRegistrations = '<div id="tl_maintenance_cache">
-		<table>
-		<thead>
-		<tr>
-		  <th class="nw">'.$GLOBALS['TL_LANG']['CronInfo']['cron_time_interval'].'</th>
-		  <th>&nbsp;</th>
-		  <th>'.$GLOBALS['TL_LANG']['CronInfo']['class'].'</th>
-		  <th>&nbsp;</th>
-		  <th>'.$GLOBALS['TL_LANG']['CronInfo']['method'].'</th>
-		  <th>&nbsp;</th>
-		  <th>'.$GLOBALS['TL_LANG']['CronInfo']['start'][0].'</th>
-		</tr>
-		</thead>
-		<tbody>';
+    	$strRegistrations = '
+<div id="tl_maintenance_cache">
+    <table>
+    <thead>
+    <tr>
+      <th class="nw">'.$GLOBALS['TL_LANG']['CronInfo']['cron_time_interval'].'</th>
+      <th>&nbsp;</th>
+      <th>'.$GLOBALS['TL_LANG']['CronInfo']['class'].'</th>
+      <th>&nbsp;</th>
+      <th>'.$GLOBALS['TL_LANG']['CronInfo']['method'].'</th>
+      <th>&nbsp;</th>
+      <th>'.$GLOBALS['TL_LANG']['CronInfo']['start'][0].'</th>
+    </tr>
+    </thead>
+    <tbody>';
     	$row=0;
     	foreach ($GLOBALS['TL_CRON']['monthly'] as $reg )
     	{
     		$strEncypt = base64_encode( \Encryption::encrypt( serialize( array( $reg[0],$reg[1] ) ) ) );
     		$interval = (!$row) ? '<strong>'.$GLOBALS['TL_LANG']['CronInfo']['interval_monthly'].'</strong>' : '' ;
     		$strRegistrations .= '
-    		<tr>
-    			<td>'.$interval.'</td>
-    			<td> </td>
-    			<td>'.$reg[0].'</td>
-    			<td> </td>
-    			<td>'.$reg[1].'</td>
-    			<td> </td>
-    			<td style="text-align: center;"><a href="system/modules/cron_info/assets/CronStart.php?crcst='.$strEncypt.'" title="'.$GLOBALS['TL_LANG']['CronInfo']['start'][1].'" onclick="if(!confirm(\''.$GLOBALS['TL_LANG']['CronInfo']['start_confirm'].'\'))return false;Backend.openModalIframe({\'width\':735,\'height\':405,\'title\':\'Cronjob Start\',\'url\':this.href});return false"><img src="system/modules/cron_info/assets/cron_info_start_icon.png" width="16" height="16" alt="'.$GLOBALS['TL_LANG']['CronInfo']['start'][1].'" style="vertical-align:text-bottom"></a></td>
-    		</tr>
-    		';
+	<tr>
+		<td>'.$interval.'</td>
+		<td> </td>
+		<td>'.$reg[0].'</td>
+		<td> </td>
+		<td>'.$reg[1].'</td>
+		<td> </td>
+		<td style="text-align: center;"><a href="system/modules/cron_info/assets/CronStart.php?crcst='.$strEncypt.'" title="'.$GLOBALS['TL_LANG']['CronInfo']['start'][1].'" onclick="if(!confirm(\''.$GLOBALS['TL_LANG']['CronInfo']['start_confirm'].'\'))return false;Backend.openModalIframe({\'width\':735,\'height\':405,\'title\':\'Cronjob Start\',\'url\':this.href});return false"><img src="system/modules/cron_info/assets/cron_info_start_icon.png" width="16" height="16" alt="'.$GLOBALS['TL_LANG']['CronInfo']['start'][1].'" style="vertical-align:text-bottom"></a></td>
+	</tr>';
     		$row++;
     	}
     	$row=0;
@@ -412,16 +347,15 @@ class CronRegistry extends \BackendModule
     		$strEncypt = base64_encode( \Encryption::encrypt( serialize( array( $reg[0],$reg[1] ) ) ) );
     		$interval = (!$row) ? '<strong>'.$GLOBALS['TL_LANG']['CronInfo']['interval_weekly'].'</strong>' : '' ;
     		$strRegistrations .= '
-    		<tr>
-    			<td>'.$interval.'</td>
-    			<td> </td>
-    			<td>'.$reg[0].'</td>
-    			<td> </td>
-    			<td>'.$reg[1].'</td>
-    			<td> </td>
-    			<td style="text-align: center;"><a href="system/modules/cron_info/assets/CronStart.php?crcst='.$strEncypt.'" title="'.$GLOBALS['TL_LANG']['CronInfo']['start'][1].'" onclick="if(!confirm(\''.$GLOBALS['TL_LANG']['CronInfo']['start_confirm'].'\'))return false;Backend.openModalIframe({\'width\':735,\'height\':405,\'title\':\'Cronjob Start\',\'url\':this.href});return false"><img src="system/modules/cron_info/assets/cron_info_start_icon.png" width="16" height="16" alt="'.$GLOBALS['TL_LANG']['CronInfo']['start'][1].'" style="vertical-align:text-bottom"></a></td>
-    		</tr>
-    		';
+	<tr>
+		<td>'.$interval.'</td>
+		<td> </td>
+		<td>'.$reg[0].'</td>
+		<td> </td>
+		<td>'.$reg[1].'</td>
+		<td> </td>
+		<td style="text-align: center;"><a href="system/modules/cron_info/assets/CronStart.php?crcst='.$strEncypt.'" title="'.$GLOBALS['TL_LANG']['CronInfo']['start'][1].'" onclick="if(!confirm(\''.$GLOBALS['TL_LANG']['CronInfo']['start_confirm'].'\'))return false;Backend.openModalIframe({\'width\':735,\'height\':405,\'title\':\'Cronjob Start\',\'url\':this.href});return false"><img src="system/modules/cron_info/assets/cron_info_start_icon.png" width="16" height="16" alt="'.$GLOBALS['TL_LANG']['CronInfo']['start'][1].'" style="vertical-align:text-bottom"></a></td>
+	</tr>';
     		$row++;
     	}
     	$row=0;
@@ -430,16 +364,15 @@ class CronRegistry extends \BackendModule
     		$strEncypt = base64_encode( \Encryption::encrypt( serialize( array( $reg[0],$reg[1] ) ) ) );
     		$interval = (!$row) ? '<strong>'.$GLOBALS['TL_LANG']['CronInfo']['interval_daily'].'</strong>' : '' ;
     		$strRegistrations .= '
-    		<tr>
-    			<td>'.$interval.'</td>
-    			<td> </td>
-    			<td>'.$reg[0].'</td>
-    			<td> </td>
-    			<td>'.$reg[1].'</td>
-    			<td> </td>
-    			<td style="text-align: center;"><a href="system/modules/cron_info/assets/CronStart.php?crcst='.$strEncypt.'" title="'.$GLOBALS['TL_LANG']['CronInfo']['start'][1].'" onclick="if(!confirm(\''.$GLOBALS['TL_LANG']['CronInfo']['start_confirm'].'\'))return false;Backend.openModalIframe({\'width\':735,\'height\':405,\'title\':\'Cronjob Start\',\'url\':this.href});return false"><img src="system/modules/cron_info/assets/cron_info_start_icon.png" width="16" height="16" alt="'.$GLOBALS['TL_LANG']['CronInfo']['start'][1].'" style="vertical-align:text-bottom"></a></td>
-    		</tr>
-    		';
+	<tr>
+		<td>'.$interval.'</td>
+		<td> </td>
+		<td>'.$reg[0].'</td>
+		<td> </td>
+		<td>'.$reg[1].'</td>
+		<td> </td>
+		<td style="text-align: center;"><a href="system/modules/cron_info/assets/CronStart.php?crcst='.$strEncypt.'" title="'.$GLOBALS['TL_LANG']['CronInfo']['start'][1].'" onclick="if(!confirm(\''.$GLOBALS['TL_LANG']['CronInfo']['start_confirm'].'\'))return false;Backend.openModalIframe({\'width\':735,\'height\':405,\'title\':\'Cronjob Start\',\'url\':this.href});return false"><img src="system/modules/cron_info/assets/cron_info_start_icon.png" width="16" height="16" alt="'.$GLOBALS['TL_LANG']['CronInfo']['start'][1].'" style="vertical-align:text-bottom"></a></td>
+	</tr>';
     		$row++;
     	}
     	$row=0;
@@ -448,16 +381,15 @@ class CronRegistry extends \BackendModule
     		$strEncypt = base64_encode( \Encryption::encrypt( serialize( array( $reg[0],$reg[1] ) ) ) );
     		$interval = (!$row) ? '<strong>'.$GLOBALS['TL_LANG']['CronInfo']['interval_hourly'].'</strong>' : '' ;
     		$strRegistrations .= '
-    		<tr>
-    			<td>'.$interval.'</td>
-    			<td> </td>
-    			<td>'.$reg[0].'</td>
-    			<td> </td>
-    			<td>'.$reg[1].'</td>
-    			<td> </td>
-    			<td style="text-align: center;"><a href="system/modules/cron_info/assets/CronStart.php?crcst='.$strEncypt.'" title="'.$GLOBALS['TL_LANG']['CronInfo']['start'][1].'" onclick="if(!confirm(\''.$GLOBALS['TL_LANG']['CronInfo']['start_confirm'].'\'))return false;Backend.openModalIframe({\'width\':735,\'height\':405,\'title\':\'Cronjob Start\',\'url\':this.href});return false"><img src="system/modules/cron_info/assets/cron_info_start_icon.png" width="16" height="16" alt="'.$GLOBALS['TL_LANG']['CronInfo']['start'][1].'" style="vertical-align:text-bottom"></a></td>
-    		</tr>
-    		';
+	<tr>
+		<td>'.$interval.'</td>
+		<td> </td>
+		<td>'.$reg[0].'</td>
+		<td> </td>
+		<td>'.$reg[1].'</td>
+		<td> </td>
+		<td style="text-align: center;"><a href="system/modules/cron_info/assets/CronStart.php?crcst='.$strEncypt.'" title="'.$GLOBALS['TL_LANG']['CronInfo']['start'][1].'" onclick="if(!confirm(\''.$GLOBALS['TL_LANG']['CronInfo']['start_confirm'].'\'))return false;Backend.openModalIframe({\'width\':735,\'height\':405,\'title\':\'Cronjob Start\',\'url\':this.href});return false"><img src="system/modules/cron_info/assets/cron_info_start_icon.png" width="16" height="16" alt="'.$GLOBALS['TL_LANG']['CronInfo']['start'][1].'" style="vertical-align:text-bottom"></a></td>
+	</tr>';
     		$row++;
     	}
     	$row=0;
@@ -466,22 +398,22 @@ class CronRegistry extends \BackendModule
     		$strEncypt = base64_encode( \Encryption::encrypt( serialize( array( $reg[0],$reg[1] ) ) ) );
     		$interval = (!$row) ? '<strong>'.$GLOBALS['TL_LANG']['CronInfo']['interval_minutely'].'</strong>' : '' ;
     		$strRegistrations .= '
-    		<tr>
-    			<td>'.$interval.'</td>
-    			<td> </td>
-    			<td>'.$reg[0].'</td>
-    			<td> </td>
-    			<td>'.$reg[1].'</td>
-    			<td> </td>
-    			<td style="text-align: center;"><a href="system/modules/cron_info/assets/CronStart.php?crcst='.$strEncypt.'" title="'.$GLOBALS['TL_LANG']['CronInfo']['start'][1].'" onclick="if(!confirm(\''.$GLOBALS['TL_LANG']['CronInfo']['start_confirm'].'\'))return false;Backend.openModalIframe({\'width\':735,\'height\':405,\'title\':\'Cronjob Start\',\'url\':this.href});return false"><img src="system/modules/cron_info/assets/cron_info_start_icon.png" width="16" height="16" alt="'.$GLOBALS['TL_LANG']['CronInfo']['start'][1].'" style="vertical-align:text-bottom"></a></td>
-    		</tr>
-    		';
+	<tr>
+		<td>'.$interval.'</td>
+		<td> </td>
+		<td>'.$reg[0].'</td>
+		<td> </td>
+		<td>'.$reg[1].'</td>
+		<td> </td>
+		<td style="text-align: center;"><a href="system/modules/cron_info/assets/CronStart.php?crcst='.$strEncypt.'" title="'.$GLOBALS['TL_LANG']['CronInfo']['start'][1].'" onclick="if(!confirm(\''.$GLOBALS['TL_LANG']['CronInfo']['start_confirm'].'\'))return false;Backend.openModalIframe({\'width\':735,\'height\':405,\'title\':\'Cronjob Start\',\'url\':this.href});return false"><img src="system/modules/cron_info/assets/cron_info_start_icon.png" width="16" height="16" alt="'.$GLOBALS['TL_LANG']['CronInfo']['start'][1].'" style="vertical-align:text-bottom"></a></td>
+	</tr>';
     		$row++;
     	}
-    	$strRegistrations .= '</tbody>
-		</table>
-		</div>';
+    	$strRegistrations .= '
+    </tbody>
+    </table>
+</div>
+';
     	return $strRegistrations;
     }
-  
 }
