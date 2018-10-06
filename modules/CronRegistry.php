@@ -40,7 +40,7 @@ class CronRegistry extends \BackendModule
     {
     	$this->loadLanguageFile('tl_cron_info');
     	
-    	$this->Template->referer     = $this->getReferer(ENCODE_AMPERSANDS);
+    	$this->Template->referer     = $this->getReferer(true);
     	$this->Template->backTitle   = specialchars($GLOBALS['TL_LANG']['MSC']['backBT']);
     	$this->Template->TitleTime   = $GLOBALS['TL_LANG']['CronInfo']['title_time'];
     	$this->Template->TitleReg    = $GLOBALS['TL_LANG']['CronInfo']['title_reg'];

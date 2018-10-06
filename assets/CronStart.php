@@ -74,8 +74,8 @@ class CronStart extends \Frontend
 			$this->loadLanguageFile('tl_cron_info');
 			
 			$this->Template = new \BackendTemplate('mod_cron_start_be');
-			$this->Template->referer = $this->getReferer(ENCODE_AMPERSANDS); 
-			$this->Template->theme = $this->getTheme();
+			$this->Template->referer = $this->getReferer(true); 
+			$this->Template->theme = \Backend::getTheme();
 			$this->Template->base = \Environment::get('base');
 			$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 			$this->Template->title = 'CronInfo';
@@ -92,8 +92,8 @@ class CronStart extends \Frontend
 		$this->loadLanguageFile('tl_cron_info');
 
 		$this->Template = new \BackendTemplate('mod_cron_start_be');
-		$this->Template->referer = $this->getReferer(ENCODE_AMPERSANDS);
-		$this->Template->theme = $this->getTheme();
+		$this->Template->referer = $this->getReferer(true);
+		$this->Template->theme = \Backend::getTheme();
 		$this->Template->base = \Environment::get('base');
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 		$this->Template->title = 'CronInfo';
