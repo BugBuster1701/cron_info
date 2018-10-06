@@ -14,6 +14,7 @@
  * Namespace
  */
 namespace BugBuster\CronInfo;
+use BugBuster\CronInfo\Cron_Encryption;
 
 /**
  * Class CronTimestamp 
@@ -327,7 +328,7 @@ class CronRegistry extends \BackendModule
     	$row=0;
     	foreach ($GLOBALS['TL_CRON']['monthly'] as $reg )
     	{
-    		$strEncypt = base64_encode( \Encryption::encrypt( serialize( array( $reg[0],$reg[1] ) ) ) );
+    		$strEncypt = base64_encode( Cron_Encryption::encrypt( serialize( array( $reg[0],$reg[1] ) ) ) );
     		$interval = (!$row) ? '<strong>'.$GLOBALS['TL_LANG']['CronInfo']['interval_monthly'].'</strong>' : '' ;
     		$strRegistrations .= '
 	<tr>
@@ -344,7 +345,7 @@ class CronRegistry extends \BackendModule
     	$row=0;
     	foreach ($GLOBALS['TL_CRON']['weekly'] as $reg )
     	{
-    		$strEncypt = base64_encode( \Encryption::encrypt( serialize( array( $reg[0],$reg[1] ) ) ) );
+    		$strEncypt = base64_encode( Cron_Encryption::encrypt( serialize( array( $reg[0],$reg[1] ) ) ) );
     		$interval = (!$row) ? '<strong>'.$GLOBALS['TL_LANG']['CronInfo']['interval_weekly'].'</strong>' : '' ;
     		$strRegistrations .= '
 	<tr>
@@ -361,7 +362,7 @@ class CronRegistry extends \BackendModule
     	$row=0;
     	foreach ($GLOBALS['TL_CRON']['daily'] as $reg )
     	{
-    		$strEncypt = base64_encode( \Encryption::encrypt( serialize( array( $reg[0],$reg[1] ) ) ) );
+    		$strEncypt = base64_encode( Cron_Encryption::encrypt( serialize( array( $reg[0],$reg[1] ) ) ) );
     		$interval = (!$row) ? '<strong>'.$GLOBALS['TL_LANG']['CronInfo']['interval_daily'].'</strong>' : '' ;
     		$strRegistrations .= '
 	<tr>
@@ -378,7 +379,7 @@ class CronRegistry extends \BackendModule
     	$row=0;
     	foreach ($GLOBALS['TL_CRON']['hourly'] as $reg )
     	{
-    		$strEncypt = base64_encode( \Encryption::encrypt( serialize( array( $reg[0],$reg[1] ) ) ) );
+    		$strEncypt = base64_encode( Cron_Encryption::encrypt( serialize( array( $reg[0],$reg[1] ) ) ) );
     		$interval = (!$row) ? '<strong>'.$GLOBALS['TL_LANG']['CronInfo']['interval_hourly'].'</strong>' : '' ;
     		$strRegistrations .= '
 	<tr>
@@ -395,7 +396,7 @@ class CronRegistry extends \BackendModule
     	$row=0;
     	foreach ($GLOBALS['TL_CRON']['minutely'] as $reg )
     	{
-    		$strEncypt = base64_encode( \Encryption::encrypt( serialize( array( $reg[0],$reg[1] ) ) ) );
+    		$strEncypt = base64_encode( Cron_Encryption::encrypt( serialize( array( $reg[0],$reg[1] ) ) ) );
     		$interval = (!$row) ? '<strong>'.$GLOBALS['TL_LANG']['CronInfo']['interval_minutely'].'</strong>' : '' ;
     		$strRegistrations .= '
 	<tr>

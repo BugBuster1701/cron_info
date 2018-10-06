@@ -27,6 +27,9 @@ ClassLoader::addClasses(array
 (
 	// Modules
 	'BugBuster\CronInfo\CronRegistry' => 'system/modules/cron_info/modules/CronRegistry.php',
+    
+    // Classes
+    'BugBuster\CronInfo\Cron_Encryption'   => 'system/modules/cron_info/classes/Cron_Encryption.php',
 ));
 
 

@@ -13,6 +13,7 @@
  * Namespace
  */
 namespace BugBuster\CronInfo;
+use BugBuster\CronInfo\Cron_Encryption;
 
 /**
  * Initialize the system
@@ -61,7 +62,7 @@ class CronStart extends \Frontend
 	public function run()
 	{
 		$strEncypt = \Input::get('crcst');
-		$arrDecypt = deserialize( \Encryption::decrypt( base64_decode($strEncypt) ) );
+		$arrDecypt = deserialize( Cron_Encryption::decrypt( base64_decode($strEncypt) ) );
 		if (is_array($arrDecypt)) 
 		{
 			$class  = $arrDecypt[0];
